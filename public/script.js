@@ -1,4 +1,5 @@
 // public/script.js
+const API_BASE_URL = 'https://basic-qr63.onrender.com/api/auth';
 
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('registerForm');
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const messageDiv = document.getElementById('register-message');
 
             try {
-                const response = await fetch('/api/auth/register', {
+                const response = await fetch(`${API_BASE_URL}/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const messageDiv = document.getElementById('login-message');
 
             try {
-                const response = await fetch('/api/auth/login', {
+                const response = await fetch(`${API_BASE_URL}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -62,9 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     messageDiv.className = 'message success';
                     messageDiv.textContent = data.message;
-                    localStorage.setItem('verificationEmail', email); // Store email for OTP verification
+                    localStorage.setItem('verificationEmail', email);
                     setTimeout(() => {
-                        window.location.href = `/verify?email=${email}`; // Redirect to OTP verification
+                        window.location.href = `/verify?email=${email}`;
                     }, 2000);
                 } else {
                     messageDiv.className = 'message error';
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (storedEmail) {
                 otpEmailInput.value = storedEmail;
             } else {
-                window.location.href = '/'; // No email found, redirect to main page
+                window.location.href = '/';
             }
         }
 
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const messageDiv = document.getElementById('otp-message');
 
             try {
-                const response = await fetch('/api/auth/verify-otp', {
+                const response = await fetch(`${API_BASE_URL}/verify-otp`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: otpEmailInput.value, otp })
@@ -112,14 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     messageDiv.className = 'message success';
                     messageDiv.textContent = data.message;
                     
-                    if (data.token) { // Check if a token was returned (for login)
+                    if (data.token) {
                         localStorage.setItem('token', data.token);
                         setTimeout(() => {
-                            window.location.href = '/home'; // Redirect to home page
+                            window.location.href = '/home';
                         }, 2000);
-                    } else { // Handle registration verification
+                    } else {
                         setTimeout(() => {
-                            window.location.href = '/'; // Redirect to login page
+                            window.location.href = '/';
                         }, 2000);
                     }
                 } else {
