@@ -1,5 +1,5 @@
 // public/script.js
-const API_BASE_URL = 'https://basic-qr63.onrender.com/api/auth';
+const API_BASE_URL = 'https://basic-9wbh.onrender.com/api/auth';
 
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('registerForm');
