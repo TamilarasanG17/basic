@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .detail-entry {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome!</h2>
+        <p>Your account has been successfully verified. Feel free to add some details below.</p>
+
+        <h3>Add Details</h3>
+        <form id="detailsForm">
+            <input type="text" id="title" placeholder="Enter Title" required>
+            <textarea id="content" placeholder="Enter Content" rows="4" required></textarea>
+            <button type="submit">Add Detail</button>
+        </form>
+
+        <hr>
+
+        <h3>Submitted Details</h3>
+        <div id="details-display">
+            </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
