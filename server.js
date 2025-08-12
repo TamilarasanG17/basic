@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
+const cors = require('cors')
+
 
 dotenv.config();
 
@@ -10,6 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors)
 app.use(express.static('public'));
 
 // Database Connection
